@@ -1,0 +1,30 @@
+{
+    "name": "kevin-jansen/silverstripe-artisan",
+    "description": "A CLI interface that makes developing Silverstripe applications elegant.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Jansen",
+            "email": "hello@kevin-jansen.dev"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "symfony/console": "^4.0|^5.0",
+        "symfony/process": "^4.2|^5.0"
+    },
+    "require-dev": {},
+    "bin": [
+        "bin/silverstripe"
+    ],
+    "autoload": {
+        "psr-4": {
+            "KevinJansen\\SilverstripeArtisan\\Console\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
