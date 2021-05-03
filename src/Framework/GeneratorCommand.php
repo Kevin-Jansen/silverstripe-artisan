@@ -3,7 +3,6 @@
 
 namespace KevinJansen\SilverstripeArtisan\Console\Framework;
 
-
 use Symfony\Component\Console\Command\Command;
 
 class GeneratorCommand extends Command
@@ -27,6 +26,11 @@ class GeneratorCommand extends Command
      */
     public function __construct()
     {
+        if (!defined("SILVERSTRIPE_ROOT")) {
+            echo 'No Silverstripe installation found. Exiting!';
+            exit(1);
+        }
+
         parent::__construct($this->name);
 
         $this->setDescription($this->description);
@@ -38,11 +42,10 @@ class GeneratorCommand extends Command
      * @param $path
      * @param int $mode
      * @param false $recursive
-     * @return bool
      */
-    public function generateDirectory($path, $mode = 0755, $recursive = false): bool
+    public function generateDirectory($path)
     {
-        return mkdir($path, $mode, $recursive);
+        return mkdir($path);
     }
 
     /**
@@ -54,5 +57,20 @@ class GeneratorCommand extends Command
     public function isDirectory($directory): bool
     {
         return is_dir($directory);
+    }
+
+    public function getStub($path) {
+        return file_get_contents($path);
+    }
+
+    /**
+     * Replaces the placeholder values with real values
+     *
+     * @param $stub
+     * @param $name
+     * @return array|string|string[]
+     */
+    public function replaceClass($stub, $name) {
+        return str_replace('{{class}}', $name, $stub);
     }
 }

@@ -57,7 +57,6 @@ class Bootstrap extends CLI
 
     protected function getSilverstripeInstance() {
         if (file_exists(getcwd() . '/vendor/silverstripe/framework/src/Core/CoreKernel.php')) {
-            echo "Silverstripe install found!" . PHP_EOL;
             define("SILVERSTRIPE_ROOT", getcwd());
 
             if (is_dir(getcwd() . '/app/src')) {

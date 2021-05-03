@@ -2,7 +2,7 @@
 
 namespace {
 
-    class { PageController } extends PageController
+    class {{class}} extends PageController
     {
         private static $allowed_actions = [];
 

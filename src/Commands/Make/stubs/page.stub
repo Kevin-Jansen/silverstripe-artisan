@@ -2,9 +2,9 @@
 
 namespace {
 
-    class { Page } extends Page
+    class {{class}} extends Page
     {
-        private static $singular_name = "{ Page }";
+        private static $singular_name = "{{class}}";
 
         private static $db = [];
 
