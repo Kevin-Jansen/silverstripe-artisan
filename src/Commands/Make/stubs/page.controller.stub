@@ -1,0 +1,14 @@
+<?php
+
+namespace {
+
+    class { PageController } extends PageController
+    {
+        private static $allowed_actions = [];
+
+        protected function init()
+        {
+            parent::init();
+        }
+    }
+}
