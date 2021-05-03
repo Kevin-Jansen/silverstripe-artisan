@@ -58,8 +58,9 @@ class MakePageCommand extends GeneratorCommand
         $this->generateDirectory(SILVERSTRIPE_APP_SRC . '/' . $name);
 
         $stubs = ['page' => $this->getStub(__DIR__ . '/stubs/page.stub'), 'controller' => $this->getStub(__DIR__ . '/stubs/page.controller.stub')];
+
         file_put_contents($path . '/' . $name . '.php', $this->replaceClass($stubs['page'], $name));
-        file_put_contents($path . '/' . $name . 'Controller.php', $this->replaceClass($stubs['page'], $name . 'Controller'));
+        file_put_contents($path . '/' . $name . 'Controller.php', $this->replaceClass($stubs['controller'], $name . 'Controller'));
 
         $output->write("<fg=green>$name created successfully!</>");
         return 0;
