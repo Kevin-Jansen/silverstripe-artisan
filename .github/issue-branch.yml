@@ -1,0 +1,13 @@
+mode: chatops
+branchName: full
+autoCloseIssue: true
+branches:
+  - label: enhancement
+    name: development
+    prefix: feature/
+  - label: bug
+    name: development
+    prefix: bugfix/
+  - label: '*'
+    name: development
+    prefix: issues/
