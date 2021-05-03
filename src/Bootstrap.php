@@ -4,19 +4,20 @@
 namespace KevinJansen\SilverstripeArtisan\Console;
 
 
+use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakePageCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\NewProjectCommand;
+use KevinJansen\SilverstripeArtisan\Console\Framework\CLI;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
 
-class Bootstrap
+class Bootstrap extends CLI
 {
-    protected $application;
-
     /**
      * Boot up the console application
      */
     public function __construct()
     {
-        $this->application = new Application;
+        parent::__construct(new Application);
 
         $this->bootstrapApplication();
     }
@@ -24,12 +25,12 @@ class Bootstrap
     /**
      * Bootstraps the application
      *
-     *  @return $this
+     * @return $this
      */
     protected function bootstrapApplication()
     {
-        $this->application->setName('Silverstripe CLI');
-        $this->application->setVersion('0.1');
+        $this->getApplication()->setName('Silverstripe CLI');
+        $this->getApplication()->setVersion('0.1');
 
         $this->initializeCommands();
 
@@ -43,17 +44,11 @@ class Bootstrap
      */
     protected function initializeCommands()
     {
-        $this->application->add(new NewProjectCommand);
+        $this->getApplication()->add(new NewProjectCommand);
+
+        // All Make commands
+        $this->getApplication()->addCommands([new MakePageCommand]);
 
         return $this;
-    }
-
-    /**
-     * Get the application
-     *
-     * @return Application
-     */
-    public function getApplication() {
-        return $this->application;
     }
 }
