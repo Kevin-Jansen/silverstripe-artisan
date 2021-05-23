@@ -15,15 +15,6 @@ class DevBuildTask extends TaskCommand
     protected $name = "dev:build";
     protected $description = "Run the dev/build command to migrate the database and flush the config";
 
-    /**
-     * Configure this command
-     */
-    protected function configure()
-    {
-        $this
-            ->addOption('flush', 'f', InputOption::VALUE_NONE, 'Flush the cached configuration');
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
