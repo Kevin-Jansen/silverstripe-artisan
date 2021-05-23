@@ -7,6 +7,7 @@ namespace KevinJansen\SilverstripeArtisan\Console;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakePageCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakeThemeCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\NewProjectCommand;
+use KevinJansen\SilverstripeArtisan\Console\Commands\Tasks\DevBuildTask;
 use KevinJansen\SilverstripeArtisan\Console\Framework\CLI;
 use Symfony\Component\Console\Application;
 use SilverStripe\Control\HTTPApplication;
@@ -52,6 +53,9 @@ class Bootstrap extends CLI
 
         // All Make commands
         $this->getApplication()->addCommands([new MakePageCommand, new MakeThemeCommand]);
+
+        // All Task commands
+        $this->getApplication()->addCommands([new DevBuildTask]);
 
         return $this;
     }
