@@ -5,6 +5,7 @@ namespace KevinJansen\SilverstripeArtisan\Console;
 
 
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakePageCommand;
+use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakeThemeCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\NewProjectCommand;
 use KevinJansen\SilverstripeArtisan\Console\Framework\CLI;
 use Symfony\Component\Console\Application;
@@ -50,7 +51,7 @@ class Bootstrap extends CLI
         $this->getApplication()->add(new NewProjectCommand);
 
         // All Make commands
-        $this->getApplication()->addCommands([new MakePageCommand]);
+        $this->getApplication()->addCommands([new MakePageCommand, new MakeThemeCommand]);
 
         return $this;
     }
@@ -59,15 +60,8 @@ class Bootstrap extends CLI
         if (file_exists(getcwd() . '/vendor/silverstripe/framework/src/Core/CoreKernel.php')) {
             define("SILVERSTRIPE_ROOT", getcwd());
 
-            if (is_dir(getcwd() . '/app/src')) {
-                $src = getcwd() . '/app/src';
-
-                // If the OS is windows, swap forward slashes to back slashes
-                if (PHP_OS_FAMILY == 'Windows') {
-                    $src = str_replace("/", "\\", $src);
-                }
-                define("SILVERSTRIPE_APP_SRC", $src);
-            }
+            $this->defineSrc('/app/src', 'SILVERSTRIPE_APP_SRC');
+            $this->defineSrc('/themes', 'SILVERSTRIPE_THEME_SRC');
 
             // Lets require the Silverstripe autoloader so we have access to it's classes
             require_once getcwd() . '/vendor/autoload.php';
@@ -81,6 +75,18 @@ class Bootstrap extends CLI
             $kernel = new CoreKernel(BASE_PATH);
             $app = new HTTPApplication($kernel);
             $app->handle($request);
+        }
+    }
+
+    private function defineSrc($path, $name) {
+        if (is_dir(getcwd() . $path)) {
+            $src = getcwd() . $path;
+
+            // If the OS is windows, swap forward slashes to back slashes
+            if (PHP_OS_FAMILY == 'Windows') {
+                $src = str_replace("/", "\\", $src);
+            }
+            define($name, $src);
         }
     }
 }

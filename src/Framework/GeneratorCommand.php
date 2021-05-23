@@ -73,4 +73,10 @@ class GeneratorCommand extends Command
     public function replaceClass($stub, $name) {
         return str_replace('{{class}}', $name, $stub);
     }
+
+    public function sanitizePath($path) {
+        if (PHP_OS_FAMILY == 'Windows') {
+            return str_replace("/", "\\", $path);
+        }
+    }
 }
