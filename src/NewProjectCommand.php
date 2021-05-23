@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KevinJansen\SilverstripeArtisan\Console\Commands;
+namespace KevinJansen\SilverstripeArtisan\Console;
 
 
 use Symfony\Component\Console\Command\Command;

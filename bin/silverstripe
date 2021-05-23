@@ -1,13 +1,16 @@
 #!/usr/bin/env php
 <?php
 
+// Only use in production
 if (file_exists(__DIR__.'/../../../autoload.php')) {
     require __DIR__.'/../../../autoload.php';
 } else {
     require __DIR__.'/../vendor/autoload.php';
 }
 
-use KevinJansen\SilverstripeArtisan\Console\Bootstrap;
+use Symfony\Component\Console\Application;
 
-$bootstrap = new Bootstrap;
-$bootstrap->getApplication()->run();
+$app = new Application('Silverstripe CLI', '0.1');
+$app->add(new \KevinJansen\SilverstripeArtisan\Console\NewProjectCommand);
+
+$app->run();
