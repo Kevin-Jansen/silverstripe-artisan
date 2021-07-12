@@ -35,7 +35,10 @@ class MakePageCommand extends GeneratorCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // First, let's validate the name for the Page. If it doesn't contain the word "Page" append it.
+        // First, let's validate that we're working in a SilverStripe project
+        $this->validateSilverstripe();
+
+        // Next, let's validate the name for the Page. If it doesn't contain the word "Page" append it.
         $name = $this->validatePageName($input);
 
         // Next, Let's generate an absolute path and validate that it doesn't already exists.

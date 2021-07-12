@@ -8,20 +8,27 @@ use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakePageCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakeThemeCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\NewProjectCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Tasks\DevBuildTask;
-use KevinJansen\SilverstripeArtisan\Console\Framework\CLI;
 use Symfony\Component\Console\Application;
 use SilverStripe\Control\HTTPApplication;
 use SilverStripe\Control\HTTPRequestBuilder;
 use SilverStripe\Core\CoreKernel;
+use Symfony\Component\Console\Input\InputOption;
 
-class Bootstrap extends CLI
+class Bootstrap
 {
+    private $application;
+
+    public function getApplication(): Application
+    {
+        return $this->application;
+    }
+
     /**
      * Boot up the console application
      */
     public function __construct()
     {
-        parent::__construct(new Application);
+        $this->application = new Application;
 
         $this->bootstrapApplication();
     }
@@ -47,8 +54,10 @@ class Bootstrap extends CLI
      *
      * @return $this
      */
-    protected function initializeCommands()
+    protected function initializeCommands(): Bootstrap
     {
+        $this->configureFlush();
+
         $this->getApplication()->add(new NewProjectCommand);
 
         // All Make commands
@@ -60,7 +69,23 @@ class Bootstrap extends CLI
         return $this;
     }
 
-    protected function getSilverstripeInstance() {
+    /**
+     * Configure the Silverstripe Flush Input
+     */
+    protected function configureFlush()
+    {
+        $this->getApplication()->getDefinition()->addOption(
+            new InputOption(
+                'flush',
+                null,
+                null,
+                'Flush SilverStripe cache and manifest'
+            )
+        );
+    }
+
+    protected function getSilverstripeInstance()
+    {
         if (file_exists(getcwd() . '/vendor/silverstripe/framework/src/Core/CoreKernel.php')) {
             define("SILVERSTRIPE_ROOT", getcwd());
 
@@ -82,7 +107,8 @@ class Bootstrap extends CLI
         }
     }
 
-    private function defineSrc($path, $name) {
+    private function defineSrc($path, $name)
+    {
         if (is_dir(getcwd() . $path)) {
             $src = getcwd() . $path;
 

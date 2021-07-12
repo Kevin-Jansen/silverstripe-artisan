@@ -26,11 +26,6 @@ class GeneratorCommand extends Command
      */
     public function __construct()
     {
-        if (!defined("SILVERSTRIPE_ROOT")) {
-            echo 'No Silverstripe installation found. Exiting!';
-            exit(1);
-        }
-
         parent::__construct($this->name);
 
         $this->setDescription($this->description);
@@ -77,6 +72,16 @@ class GeneratorCommand extends Command
     public function sanitizePath($path) {
         if (PHP_OS_FAMILY == 'Windows') {
             return str_replace("/", "\\", $path);
+        }
+    }
+
+    /**
+     * Validates whether the silverstripe root global is set
+     */
+    public function validateSilverstripe() {
+        if (!defined("SILVERSTRIPE_ROOT")) {
+            echo 'No Silverstripe installation found. Exiting!';
+            exit(1);
         }
     }
 }

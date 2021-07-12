@@ -27,12 +27,17 @@ class TaskCommand extends Command
      */
     public function __construct()
     {
+        parent::__construct($this->name);
+        $this->setDescription($this->description);
+    }
+
+    /**
+     * Validates whether the silverstripe root global is set
+     */
+    public function validateSilverstripe() {
         if (!defined("SILVERSTRIPE_ROOT")) {
             echo 'No Silverstripe installation found. Exiting!';
             exit(1);
         }
-
-        parent::__construct($this->name);
-        $this->setDescription($this->description);
     }
 }

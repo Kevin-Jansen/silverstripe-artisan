@@ -27,7 +27,10 @@ class MakeThemeCommand extends GeneratorCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // First let's get an absolute path where the new theme should be stored
+        // First, let's validate that we're working in a SilverStripe project
+        $this->validateSilverstripe();
+
+        // Next, let's get an absolute path where the new theme should be stored
         $name = $input->getArgument('name');
         $path = $this->sanitizePath(SILVERSTRIPE_THEME_SRC . "/$name");
 
