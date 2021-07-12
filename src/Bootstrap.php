@@ -4,6 +4,7 @@
 namespace KevinJansen\SilverstripeArtisan\Console;
 
 
+use KevinJansen\SilverstripeArtisan\Console\Commands\Injector\LookupCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakePageCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakeThemeCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\NewProjectCommand;
@@ -65,6 +66,9 @@ class Bootstrap
 
         // All Task commands
         $this->getApplication()->addCommands([new DevBuildTask]);
+
+        // All Injector commands
+        $this->getApplication()->addCommands([new LookupCommand]);
 
         return $this;
     }
