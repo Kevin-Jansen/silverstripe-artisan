@@ -8,6 +8,7 @@ use KevinJansen\SilverstripeArtisan\Console\Commands\Injector\LookupCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakePageCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Make\MakeThemeCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\NewProjectCommand;
+use KevinJansen\SilverstripeArtisan\Console\Commands\Object\ChildrenCommand;
 use KevinJansen\SilverstripeArtisan\Console\Commands\Tasks\DevBuildTask;
 use Symfony\Component\Console\Application;
 use SilverStripe\Control\HTTPApplication;
@@ -69,6 +70,9 @@ class Bootstrap
 
         // All Injector commands
         $this->getApplication()->addCommands([new LookupCommand]);
+
+        // All Object commands
+        $this->getApplication()->addCommands([new ChildrenCommand]);
 
         return $this;
     }

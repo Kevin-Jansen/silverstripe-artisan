@@ -28,7 +28,6 @@ class CLICommand extends Command
     public function __construct()
     {
         parent::__construct($this->name);
-
         $this->setDescription($this->description);
     }
 

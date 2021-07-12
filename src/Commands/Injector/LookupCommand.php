@@ -19,7 +19,7 @@ class LookupCommand extends CLICommand
     protected $description = "Shows which class is returned from an Injector reference";
 
     /**
-     * {@inheritDoc}
+     * Configure this command
      */
     protected function configure()
     {
@@ -28,7 +28,11 @@ class LookupCommand extends CLICommand
     }
 
     /**
-     * {@inheritDoc}
+     * Executes this command
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
