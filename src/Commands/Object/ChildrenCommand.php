@@ -12,6 +12,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use SilverStripe\Core\ClassInfo;
 
+/**
+ * List all child classes of a given class name
+ *
+ * @package silverstripe-console
+ * @author  Robbie Averill <robbie@averill.co.nz>
+ */
 class ChildrenCommand extends CLICommand
 {
     use ObjectUtilities;
